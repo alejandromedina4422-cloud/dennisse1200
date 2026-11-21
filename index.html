@@ -63,11 +63,11 @@ html,body{margin:0;width:100%;height:100%;background:#080d20;overflow:hidden}
 .orientation-card p{font-size:17px;line-height:1.6;margin:0 0 12px}
 .orientation-card span{font-size:12px;letter-spacing:.08em;color:#c7b18f}
 .lantern-message-ui{z-index:40}
-@media (max-width:900px) and (orientation:portrait){
+@media (max-width:900px) and (orientation:portrait) and (hover:none) and (pointer:coarse){
  .orientation-gate{display:flex}
  .stage{visibility:hidden}
 }
-@media (max-width:900px) and (orientation:landscape){
+@media (max-width:900px) and (orientation:landscape) and (hover:none) and (pointer:coarse){
  .orientation-gate{display:none}
  .stage{visibility:visible}
 }
@@ -164,7 +164,7 @@ html,body{margin:0;width:100%;height:100%;background:#080d20;overflow:hidden}
 }
 .scene.hero-letter-open .lantern-hit-layer{visibility:hidden;pointer-events:none}
 
-@media (max-width:900px) and (orientation:landscape){
+@media (max-width:900px) and (orientation:landscape) and (hover:none) and (pointer:coarse){
  .hero-lantern-trigger{z-index:30}
  .lantern-hit-layer{z-index:14}
 }
@@ -685,7 +685,7 @@ function createPass(hostId,configs){
  const renderer=new THREE.WebGLRenderer({alpha:true,antialias:true,powerPreference:"high-performance"});
  // Supersampling real: evita que el modelo 3D quede limitado a ~1 pixel por pixel CSS.
  // La banda trasera contiene más instancias: resolución nativa para contener el coste.
- const mobileLandscape=window.matchMedia("(max-width: 900px) and (orientation: landscape)").matches;
+ const mobileLandscape=window.matchMedia("(max-width: 900px) and (orientation: landscape) and (hover: none) and (pointer: coarse)").matches;
  renderer.setPixelRatio(hostId==="lanternsBack"?1:Math.max(1,Math.min(window.devicePixelRatio||1,mobileLandscape?1.75:1.35)));
  renderer.setSize(W,H,false);
  renderer.outputColorSpace=THREE.SRGBColorSpace;
@@ -1119,7 +1119,7 @@ new ResizeObserver(resize).observe(document.querySelector(".scene"));resize();
 const orientationGate=document.getElementById("orientationGate");
 const mainStage=document.getElementById("mainStage");
 function refreshOrientationGate(){
- const needsLandscape=window.matchMedia("(max-width: 900px) and (orientation: portrait)").matches;
+ const needsLandscape=window.matchMedia("(max-width: 900px) and (orientation: portrait) and (hover: none) and (pointer: coarse)").matches;
  orientationGate.style.display=needsLandscape?"flex":"none";
  mainStage.style.visibility=needsLandscape?"hidden":"visible";
 }
